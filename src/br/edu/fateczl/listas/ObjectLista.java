@@ -156,12 +156,12 @@ public class ObjectLista {
 		
 	}
 
-	public String tostring() {
+	public String toString() {
 		StringBuffer buffer = new StringBuffer();
 		try {
 			int size = size();
 			for (int i = 0 ; i < size ; i++) {
-				buffer.append("\t" + get(i)+ "\t");
+				buffer.append( get(i)+ "	");
 				if (i == size - 1) {
 					buffer.append("NULL");
 				}
