@@ -1,5 +1,5 @@
 /*
- RESUMO		 : C) Construção da lista de objetos (conjunto de nós)
+ RESUMO		 : Construção da lista (conjunto de nós)
  PROGRAMADORA: Luiza Felix
  DATA		 : 05/05/2023
  */
@@ -52,7 +52,7 @@ public class ObjectLista {
 		if (vazia()) {
 			throw new Exception("Lista vazia.");
 		}
-		int size = (size() - 1);	
+		int size = size();	
 		if (indice < 0 || indice > size) {
 			throw new Exception("Posição inválida.");
 		}
@@ -60,17 +60,16 @@ public class ObjectLista {
 		if (indice == 0) {
 			addfirst(valor);
 		} else if(indice == size) {
-				addlast(valor);
+			addlast(valor);
 		} else {
 			ObjectNo novo = new ObjectNo();
 			novo.dado = valor;
 			
-			ObjectNo anterior = getno(indice); //dado que está nessa posição agr
-			novo.proximo = anterior.proximo; // passo o endereço do próimo para nã foder a sequencia
-			anterior.proximo = novo; //meu novo dado nessa posição 
+			ObjectNo anterior = getno(indice - 1); //dado que está antes da posção 
+			novo.proximo = anterior.proximo; // passo o endereço do próximo para não foder a sequencia
+			anterior.proximo = novo; //vai apontar para o novo, o que vinha antes é apontado pelo anterior
 		}
 	}
-	
 	
 	public void removefirst() throws Exception {
 		if (vazia()) {
@@ -93,7 +92,7 @@ public class ObjectLista {
 			throw new Exception("Lista vazia.");
 		}
 		
-		int size = (size() - 1);
+		int size = size();
 		if (indice < 0 || indice > size) {
 			throw new Exception("Posição inválida.");
 		}
@@ -107,8 +106,7 @@ public class ObjectLista {
 			anterior.proximo = atual.proximo; //copio o caminho e o no atual se perde para todo o sempre	
 		}
 	}
-	
-	
+
 	private ObjectNo getno(int indice) throws Exception {
 		if (indice < 0) {
 			throw new Exception("Posição Inválida");
@@ -118,11 +116,10 @@ public class ObjectLista {
 		int i = 0;
 		while (i < indice) {
 			aux = aux.proximo;
-			indice++;
+			i++;
 		}
 		return aux;
 	}
-	
 	
 	public int size() {
 		int i = 0;

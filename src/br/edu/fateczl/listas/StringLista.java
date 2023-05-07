@@ -52,7 +52,7 @@ public class StringLista {
 		if (vazia()) {
 			throw new Exception("Lista vazia.");
 		}
-		int size = (size() - 1);	
+		int size = size();	
 		if (indice < 0 || indice > size) {
 			throw new Exception("Posição inválida.");
 		}
@@ -60,17 +60,16 @@ public class StringLista {
 		if (indice == 0) {
 			addfirst(valor);
 		} else if(indice == size) {
-				addlast(valor);
+			addlast(valor);
 		} else {
 			StringNo novo = new StringNo();
 			novo.dado = valor;
 			
-			StringNo anterior = getno(indice); //dado que está nessa posição agr
-			novo.proximo = anterior.proximo; // passo o endereço do próimo para nã foder a sequencia
-			anterior.proximo = novo; //meu novo dado nessa posição 
+			StringNo anterior = getno(indice - 1); //dado que está antes da posção 
+			novo.proximo = anterior.proximo; // passo o endereço do próximo para não foder a sequencia
+			anterior.proximo = novo; //vai apontar para o novo, o que vinha antes é apontado pelo anterior
 		}
 	}
-	
 	
 	public void removefirst() throws Exception {
 		if (vazia()) {
@@ -93,7 +92,7 @@ public class StringLista {
 			throw new Exception("Lista vazia.");
 		}
 		
-		int size = (size() - 1);
+		int size = size();
 		if (indice < 0 || indice > size) {
 			throw new Exception("Posição inválida.");
 		}
@@ -107,8 +106,7 @@ public class StringLista {
 			anterior.proximo = atual.proximo; //copio o caminho e o no atual se perde para todo o sempre	
 		}
 	}
-	
-	
+
 	private StringNo getno(int indice) throws Exception {
 		if (indice < 0) {
 			throw new Exception("Posição Inválida");
@@ -118,11 +116,10 @@ public class StringLista {
 		int i = 0;
 		while (i < indice) {
 			aux = aux.proximo;
-			indice++;
+			i++;
 		}
 		return aux;
 	}
-	
 	
 	public int size() {
 		int i = 0;
